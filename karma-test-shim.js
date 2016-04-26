@@ -14,22 +14,22 @@ var appRoot ='app'; // no trailing slash!
 
 // RegExp for client application base path within karma (which always starts 'base\')
 var karmaBase = '^\/base\/'; // RegEx string for base of karma folders
-var appPackage = 'base/' + appRoot; //e.g., base/app
+var appPackage = 'base/' + appRoot; //e.g., base/app_basic
 var appRootRe = new RegExp(karmaBase + appRoot + '\/');
 var onlyAppFilesRe = new RegExp(karmaBase + appRoot + '\/(?!.*\.spec\.js$)([a-z0-9-_\.\/]+)\.js$');
 
 var moduleNames = [];
 
-// Configure systemjs packages to use the .js extension for imports from the app folder
+// Configure systemjs packages to use the .js extension for imports from the app_basic folder
 var packages = {};
 packages[appPackage] = {
     defaultExtension: false,
     format: 'register',
     map: Object.keys(window.__karma__.files)
       .filter(onlyAppFiles)
-      // Create local module name mapping to karma file path for app files
+      // Create local module name mapping to karma file path for app_basic files
       // with karma's fingerprint in query string, e.g.:
-      // './hero.service': '/base/app/hero.service.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
+      // './hero.service': '/base/app_basic/hero.service.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
       .reduce(function (pathsMapping, appPath) {
         var moduleName = appPath.replace(appRootRe, './').replace(/\.js$/, '');
         pathsMapping[moduleName] = appPath + '?' + window.__karma__.files[appPath];
@@ -53,7 +53,7 @@ System.config({ packages: packages });
       browser.TEST_BROWSER_APPLICATION_PROVIDERS);
 
     // Load all spec files
-    // (e.g. 'base/app/hero.service.spec.js')
+    // (e.g. 'base/app_basic/hero.service.spec.js')
     return Promise.all(
       Object.keys(window.__karma__.files)
         .filter(onlySpecFiles)

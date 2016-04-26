@@ -1,6 +1,6 @@
 module.exports = function(config) {
 
-  var appBase   = 'app/';      // transpiled app JS files
+  var appBase   = 'app/';      // transpiled app_basic JS files
   var appAssets = 'base/app/'; // component assets fetched by Angular's compiler
 
   config.set({
@@ -35,7 +35,7 @@ module.exports = function(config) {
       { pattern: 'node_modules/angular2/bundles/router.dev.js', included: true, watched: true },
       { pattern: 'node_modules/a2-in-memory-web-api/web-api.js', included: true, watched: true },
 
-      // Configures module loader w/ app and specs, then launch karma
+      // Configures module loader w/ app_basic and specs, then launch karma
       { pattern: 'karma-test-shim.js', included: true, watched: true },
 
       // transpiled application & spec code paths loaded via module imports
